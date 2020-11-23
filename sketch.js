@@ -7,7 +7,7 @@ var engine, world;
 var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
-
+var gameState = "onSling";
 
 function preload() {
     backgroundImg = loadImage("sprites/bg.png");
@@ -17,6 +17,36 @@ function setup(){
     var canvas = createCanvas(1200,400);
     engine = Engine.create();
     world = engine.world;
+
+    //data type -- string
+    var name = "Bobby";
+    console.log(name);
+
+    //data type -- number
+    var marks = 50;
+    console.log(marks);
+
+    //data type -- boolean (yes/no) -- true/false
+    var pass = false;
+    console.log(pass);
+
+    var object = new Ground(600,height,1200,20);;
+    console.log(object);
+
+    //data type -- array multiple values in one variable
+    var arr1 = [1,2,3,4];
+    console.log(arr1);
+
+    var student = [name, marks, pass];
+   // console.log(student);
+
+    var student = [[name, marks, pass], ["Bobby", 100, true]];
+   // console.log(student);
+
+    //console.log(student[1]);
+    //console.log(student[0][0], student[1][2]);
+
+ 
 
 
     ground = new Ground(600,height,1200,20);
@@ -69,12 +99,15 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    if(gameState !== "launched"){
+         Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    }
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gameState = "launched";
 }
 
 function keyPressed(){
